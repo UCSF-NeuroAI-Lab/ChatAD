@@ -85,6 +85,122 @@ def get_consent_forms_resource() -> str:
 # Tools (for agents to call)
 
 @mcp.tool()
+def search_catalog(query: str) -> str:
+    """
+    Search the ADNI document catalog by keyword.
+    Use this FIRST to find relevant documents before fetching PDFs.
+    
+    Args:
+        query: Search terms (e.g., "data governance", "MRI protocol", "consent form")
+    
+    Returns:
+        JSON containing matching documents with URLs that can be passed to fetch_pdf
+    """
+    with open(CATALOG_PATH, 'r') as f:
+        catalog = json.load(f)
+    
+    query_lower = query.lower()
+    query_terms = query_lower.split()
+    matches = []
+    
+    # Search through all documents in the catalog
+    def search_documents(docs, category="", subcategory=""):
+        for doc in docs:
+            if not isinstance(doc, dict):
+                continue
+            
+            # Build searchable text from document fields
+            searchable = " ".join([
+                doc.get("title", ""),
+                doc.get("ai_title", ""),
+                doc.get("ai_description", ""),
+                category,
+                subcategory
+            ]).lower()
+            
+            # Check if all query terms match
+            if all(term in searchable for term in query_terms):
+                # Only include PDFs and useful documents
+                if doc.get("file_extension") in ["pdf", "docx", "doc"]:
+                    matches.append({
+                        "title": doc.get("ai_title") or doc.get("title", ""),
+                        "description": doc.get("ai_description", ""),
+                        "url": doc.get("url", ""),
+                        "category": category,
+                        "subcategory": subcategory,
+                        "file_type": doc.get("file_extension", "")
+                    })
+    
+    # Search documents by category
+    for category, subcats in catalog.get("documents_by_category", {}).items():
+        if isinstance(subcats, dict):
+            for subcat, docs in subcats.items():
+                if isinstance(docs, list):
+                    search_documents(docs, category, subcat)
+        elif isinstance(subcats, list):
+            search_documents(subcats, category)
+    
+    # Also search uncategorized documents
+    uncategorized = catalog.get("uncategorized", {}).get("documents", [])
+    search_documents(uncategorized, "Uncategorized")
+    
+    # Limit results
+    if len(matches) > 20:
+        matches = matches[:20]
+        truncated = True
+    else:
+        truncated = False
+    
+    result = {
+        "query": query,
+        "total_matches": len(matches),
+        "truncated": truncated,
+        "documents": matches,
+        "hint": "Use fetch_pdf with a document URL to retrieve full content"
+    }
+    
+    return json.dumps(result, indent=2)
+
+
+@mcp.tool()
+def list_categories() -> str:
+    """
+    List all available document categories in the ADNI catalog.
+    Use this to discover what types of documents are available.
+    
+    Returns:
+        JSON containing category names and document counts
+    """
+    with open(CATALOG_PATH, 'r') as f:
+        catalog = json.load(f)
+    
+    categories = {}
+    for category, subcats in catalog.get("documents_by_category", {}).items():
+        if isinstance(subcats, dict):
+            count = sum(len(docs) for docs in subcats.values() if isinstance(docs, list))
+            subcategories = list(subcats.keys())
+        elif isinstance(subcats, list):
+            count = len(subcats)
+            subcategories = []
+        else:
+            count = 0
+            subcategories = []
+        
+        categories[category] = {
+            "document_count": count,
+            "subcategories": subcategories
+        }
+    
+    result = {
+        "total_categories": len(categories),
+        "categories": categories,
+        "hint": "Use search_catalog to find specific documents within a category"
+    }
+    
+    return json.dumps(result, indent=2)
+
+
+@mcp.tool()
 def fetch_pdf(url: str) -> str:
     """
     Fetch and extract text content from an ADNI PDF document.
