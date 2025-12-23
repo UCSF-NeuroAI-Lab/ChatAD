@@ -1,0 +1,66 @@
+[Page 1]
+   
+ 
+ADNI3 MRI OVERVIEW   
+ 
+ Page 1 of 2 Version Date: 23 May 2018 
+Copyright © 2017 Mayo Foundation for Medical Education and Research 
+ 
+ 
+Alzheimer ’s Disease Neuro Imaging MRI Overview  
+ 
+The Alzheimer’s Disease Neuroimaging Initiative (ADNI) is a longitudinal natural history study  whose 
+primary purpose is informing the design of therapeutic trials in Alzheimer’s disease (AD) . Along with 
+longitudinal clinical, PET, biofluid and genetic information, MRI data is one component of the 
+comprehensive data set collected in participants.  
+ 
+ADNI began in 2004 and to date 3 different phases of ADNI have been undertaken. These are named ADNI 
+1, ADNI GO/2 and now ADNI 3. These roughly correspond to typical 5 year NIA grant cycles. The MR 
+protocol evolved over these 3 phases. The MRI protocol for ADNI1 (2004- 2009) focused on consistent 
+longitudinal structural imaging on 1.5T scanners using T1-  and dual echo T2-weighted sequences. One -fourth 
+of ADNI  1 subjects were also scanned using essentially the same protocol on 3T scanners.   
+ 
+In ADNI -GO/ADNI2 (2 010-2016) , imaging was performed at 3T with T1 -weighted imaging parameters 
+similar to ADNI1. In place of the dual echo T2-weighted image from ADNI1, 2D  FLAIR and T2*- weighted 
+imaging was added at all sites. Both f ully sampled and accelerated T1 -weighted images were acquired in 
+each imaging session. Advanced imaging was included depending on scanner manufacturer:  diffusion 
+imaging on GE scanners, resting state functional MRI on Philips scanners and arterial spin labeling on 
+Siemens scanners.   
+ 
+ADNI  3 imagi ng is being done exclusively on 3T scanners. Nearly all of the imaging sequences from ADNI2 
+have been updated for inclusion in ADNI  3. Each of the ADNI  2 “advanced imaging” sequences is now 
+included in the “basic” ADNI  3 protocol with a few site -wise excep tions related to sequence license issues.  
+In order to create imaging protocols that can be used to support drug studies , it is necessary to restrict the 
+sequences employed to those commercially available on scanners.   
+ 
+ADNI users should be aware that t here is a broad gap between older MRI systems and the state- of-the-art 
+systems within each vendor’s product line. Thus, the ADNI MR data set includes a wide range of scanner 
+platforms.  A two -tiered approach is taken to accommodate the range of variability in scanners in ADNI 3 . 
+“ADNI  3 Basic” and “ADNI  3 Advanced” protocols have been created.   
+ 
+Both images and quantitative numeric ADNI MR data are available publically.  
+ 
+Each series in each exam undergoes quality control at Mayo Clinic. Two levels of quality control are 
+performed; adherence to the protocol parameters and series- specific quality ( i.e., subject motion, anatomic 
+coverage, etc.). Scan quality is graded subject ively by trained analysts: 1 -3 is acceptable and 4 is failure 
+(unusable). This QC information will eventually be  available for each series on LONI.  Thus , users will be 
+able to easily employ exam level QC information as filters in data collections.  
+MR scanners routinely undergo upgrades. These can be relatively minor (SW version) or major (hardware 
+changes, e.g. head coil). In some cases, the scanner itself will be replaced at an ADNI site. We advise the 
+following  approach to the issue of scanner change s:  
+1. Assume that longitudinal within subject data is not compatible before vs after a change in scanner.   
+
+[Page 2]
+   
+ 
+ADNI3 MRI OVERVIEW   
+ 
+ Page 2 of 2 Version Date: 23 May 2018 
+Copyright © 2017 Mayo Foundation for Medical Education and Research 
+2. Assume that longitudinal within subject data is not compatible before vs after a major hardware 
+change – e .g., change in head coil.  
+3. Assume that longit udinal within subject data maybe compatible before vs after a SW version change, 
+but be advised that this may not be shown to be true eventually for some types of SW changes. 
+ 
+ 
+ 
